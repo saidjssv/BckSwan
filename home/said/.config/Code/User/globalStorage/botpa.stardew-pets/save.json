@@ -1,0 +1,16 @@
+{
+    "money": 55,
+    "pets": [
+        {
+            "specie": "Goat",
+            "name": "UwU",
+            "color": "Adult"
+        },
+        {
+            "specie": "Cat",
+            "name": "Mar",
+            "color": "Black"
+        }
+    ],
+    "decoration": []
+}
