@@ -1,0 +1,20 @@
+{
+  "name": "bckswan",
+  "version": "1.0.0",
+  "description": "Don't just save contacts, save connections.",
+  "homepage": "https://github.com/saidjssv/BckSwan#readme",
+  "bugs": {
+    "url": "https://github.com/saidjssv/BckSwan/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saidjssv/BckSwan.git"
+  },
+  "license": "No license",
+  "author": "Said",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
