@@ -1,5 +1,23 @@
 :root {
-    --text-color: #EDEDF2;
+    /* Primary palette */
+    --bg-nav: #0B0B10;
+    --bg-main: #16161D;
+    --bg-cards: #2A2A35;
+    --color-accent-primary: #C1121F;
+    --color-accent-secondary: #4D9DE0;
+    --color-text-primary: #E6E6E6;
+    --color-text-secondary: #A0A0A8;
+    /* */
     --font-sans: "Inter", system-ui, sans-serif;
     --font-serif: "Playfair Display", "Times New Roman", serif;
+}
+
+[data-theme="light"] {
+    --bg-nav: #F7F3EE;
+    --bg-main: #E9E2D8;
+    --bg-cards: #D6D3CE;
+    --color-accent-primary: #8B6F47;
+    --color-accent-secondary: #7D9D8D;
+    --color-text-primary: #2E2A26;
+    --color-text-secondary: #5A554F;
 }
