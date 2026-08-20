@@ -1,24 +1,49 @@
+/* Navbar: barra superior fija y accesible.
+   Comentarios en español para cada bloque explicando intención y comportamiento.
+   Variables CSS esperadas: --bg-nav, --bg-main, --color-text-primary,
+   --color-text-secondary, --color-accent-primary, --color-accent-secondary, --font-sans
+*/
+
+/* Contenedor principal de la barra */
 .topbar {
     display: flex;
     align-items: center;
+    /* Fondo translúcido por defecto (efecto blur) */
     background-color: var(--bg-nav);
+
+    /* Barra fija en la parte superior y ocupando todo el ancho */
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     box-sizing: border-box;
-    border-radius: 0rem 0rem 2rem 2rem; /* this will be bigger when scroll*/
-    /* margin: 0.1rem; */
+
+    /* Esquinas redondeadas por defecto (se suavizan al hacer scroll) */
+    border-radius: 0 0 2rem 2rem;
+
+    /* Efecto de desenfoque de fondo (soportado en navegadores modernos) */
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+
     padding: 0.5rem 1rem;
     gap: 0.4rem;
     transform: translateY(0);
-    transition: border-radius 0.45s cubic-bezier(0.22, 1, 0.36, 1), padding 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.45s cubic-bezier(0.22, 1, 0.36, 1), transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.45s cubic-bezier(0.22, 1, 0.36, 1), margin 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+
+    /* Transiciones agrupadas: sólo las propiedades necesarias para un mejor rendimiento */
+    transition: border-radius 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+                padding 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+                background-color 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+                margin 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+
+    /* Sugerencia al navegador sobre qué propiedades animar */
     will-change: transform, box-shadow, margin;
     margin: 0;
 }
 
+/* Estado cuando la página se ha desplazado: apariencia más compacta y sombreada */
 .topbar.is-scrolled {
     border-radius: 1.6rem;
     margin: 0.3rem;
@@ -29,10 +54,12 @@
     border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
+/* Reserva de espacio para que el contenido no quede oculto bajo la barra fija */
 body {
     padding-top: 6rem;
 }
 
+/* Logo (imagen o SVG) */
 .topbar .logo {
     width: 4.5rem;
     height: 4.5rem;
@@ -40,6 +67,7 @@ body {
     display: block;
 }
 
+/* Texto del logo: nombre de la app/brand */
 .topbar .logotext {
     color: var(--color-text-primary);
     font-family: var(--font-sans);
@@ -47,15 +75,14 @@ body {
     margin-left: 0.1rem;
 }
 
+/* Contenedor de navegación: se empuja a la derecha con margin-left:auto */
 .topbar nav {
     display: flex;
     gap: 1.5rem;
     margin-left: auto;
-
 }
 
-/* Navigation links */
-
+/* Lista de enlaces de navegación: inline, sin estilos de lista por defecto */
 .topbar nav .nav-links {
     display: flex;
     gap: 1.5rem;
@@ -63,39 +90,42 @@ body {
     list-style: none;
     margin: 0;
     padding: 0;
-    margin-right: 2rem;
+    margin-right: 2rem; /* espacio a la derecha (p. ej. para botones de usuario) */
 }
 
+/* Estilo base de los enlaces */
 .topbar nav .nav-links a {
     color: var(--color-text-secondary);
     text-decoration: none;
     font-family: var(--font-sans);
-    position: relative;
+    position: relative; /* necesario para pseudo-elementos ::after/::before */
     transition: color 0.25s ease;
     display: inline-flex;
     align-items: center;
 }
 
+/* Enlace destacado (ej. CTA) */
 .topbar nav .nav-links a.start-link {
     border: 2px solid var(--color-accent-primary);
     padding: 0.7rem 0.8rem;
     border-radius: 0.5rem;
-    overflow: hidden;
-    z-index: 0;
-    isolation: isolate;
+    overflow: hidden; /* recorta el ::before animado */
+    z-index: 0; /* sitúa el enlace por encima del ::before (que tendrá z-index:-1) */
+    isolation: isolate; /* asegura stacking context para z-index negativos en pseudo */
     color: var(--color-accent-primary);
 }
 
-/* hover */
-
+/* Hover general: cambia color de texto */
 .topbar nav .nav-links a:hover {
     color: var(--color-accent-secondary);
 }
 
+/* Hover específico para el enlace destacado: invertir color del texto sobre el fondo animado */
 .topbar nav .nav-links a.start-link:hover {
-    color: var(--color-text-primary);
+    color: #717171; /* color independiente por el momento, la cague con las jodidas variables */
 }
 
+/* Subrayado animado para enlaces normales: escala en X desde la izquierda */
 .topbar nav .nav-links a:not(.start-link)::after {
     content: "";
     position: absolute;
@@ -113,12 +143,13 @@ body {
     transform: scaleX(1);
 }
 
+/* Fondo animado para el enlace destacado: se desliza desde la izquierda */
 .topbar nav .nav-links a.start-link::before {
     content: "";
     position: absolute;
-    inset: 0;
-    background: var(--color-accent-primary); /* color de fondo hover */
-    z-index: -1;
+    inset: 0; /* top/right/bottom/left = 0 */
+    background: var(--color-accent-primary); /* fondo que aparece al hacer hover */
+    z-index: -1; /* detrás del contenido del enlace */
     transform: translateX(-110%);
     transition: transform 0.35s ease;
 }

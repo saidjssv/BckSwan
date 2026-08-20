@@ -1,7 +1,7 @@
 const initNavbarScroll = () => {
     const navbar = document.querySelector('.topbar');
 
-    if (!navbar) {
+    if(!navbar) {
         return;
     }
 
