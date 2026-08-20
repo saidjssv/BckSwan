@@ -122,7 +122,7 @@ body {
 
 /* Hover específico para el enlace destacado: invertir color del texto sobre el fondo animado */
 .topbar nav .nav-links a.start-link:hover {
-    color: #717171; /* color independiente por el momento, la cague con las jodidas variables */
+    color: #000000; /* color independiente por el momento, la cague con las jodidas variables */
 }
 
 /* Subrayado animado para enlaces normales: escala en X desde la izquierda */
